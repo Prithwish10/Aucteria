@@ -1,8 +1,8 @@
 ## Cloning and installing
 Clone this repository.
 ```
-git clone https://github.com/codingly-io/sls-course-frontend
-cd sls-course-auctions-frontent
+https://github.com/Prithwish10/Aucteria.git
+cd Aucteria-frontend
 ```
 
 Install the NPM dependencies for this project.
