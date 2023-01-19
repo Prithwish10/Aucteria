@@ -1,4 +1,4 @@
-# Notification Service
+<h1 align="center">Notification Service</h1>
 
 ## What's included
 * Folder structure used consistently across our projects.
