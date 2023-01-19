@@ -179,11 +179,11 @@ I'm working on Ubuntu 20.04
   Currently AWS or serverless don't know who you are. So you need to do the following steps:
   * Head over to your AWS developer console, and serach for the service IAM. This service handles permissions and users in AWS
   * Head over to **Users** from the left panel
-  * Now you need to create a new user. Because it is not recommented to user your root AWS account. 
+  * Now you need to create a new user. Because it is not recommended to use your root AWS account. 
     * Give your new user the Programmatic access and AWS Management Console access.
-    * Create a password for this new user
-    * Attach Policies: You can give the AdmistratorAccess to your user, but in production built its recommended to give users permission to that many services that           they require.
-    * After creating the user, you will get an Access key ID and Secret access key. You will need those to configure the AWS CLI.
+    * Create a strong password for this new user.
+    * Attach Policies: You can give the AdmistratorAccess to your user, but in production built its recommended to give users permission to that many services that they require.
+    * After creating the user, you will get an **Access key ID** and **Secret access key**. You will need those to configure the AWS CLI.
     * Head over to your cmd and type **aws configure**, and give the Access key ID and Secret access key, along with the aws region and serverless.yaml file format.
       ```sh
       C:\Users\prith>aws configure
