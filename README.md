@@ -178,7 +178,7 @@ Don't forget to give the project a star! Thanks again!
 <!-- CONTACT -->
 ## Contact
 
-Your Name - Prithwish Das
+Name - Prithwish Das
 
 Project Link: https://github.com/Prithwish10/Aucteria
 
