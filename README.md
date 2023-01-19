@@ -54,7 +54,7 @@
       </ul>
     </li>
 <!--     <li><a href="#usage">Usage</a></li> -->
-<!--     <li><a href="#roadmap">Roadmap</a></li> -->
+    <li><a href="#deployment">Deployment</a></li>
     <li><a href="#contributing">Contributing</a></li>
 <!--     <li><a href="#license">License</a></li> -->
     <li><a href="#contact">Contact</a></li>
@@ -196,6 +196,30 @@ I'm working on Ubuntu 20.04
     
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
+<!-- Deployment -->
+## Deployment
+
+In order to deploy a stack, open your cmd and `cd` to the service that you want to deploy, and enter the following command:
+
+```sh
+cd auth_service
+sls deploy
+```
+This will deploy the service on the default stage (i.e., dev) specified on serverless.yml file.
+
+You can also deploy the service on any particular stage using the following command:
+
+```sh
+sls deploy --stage prod
+```
+
+If you have made changes to a specific lambda function,in that case you don't want to redeploy the entire stack, but what you want is to deploy that specific lambda function in which you have made the changes. For that use the following command:
+
+```sh
+sls deploy -f <FUNCTION_NAME>
+```
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 <!-- CONTRIBUTING -->
 ## Contributing
