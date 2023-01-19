@@ -28,7 +28,7 @@ npm install
 
 ### 3. Create `secret.pem` file
 
-This file will contain your Auth0 public certificate, used to verify tokens.
+This file will contain your **Auth0** public certificate, used to verify tokens.
 
 Create a `secret.pem` file in the root folder of this project. Simply paste your public certificate in there.
 
