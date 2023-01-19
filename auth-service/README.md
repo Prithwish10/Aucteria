@@ -16,7 +16,7 @@
 
 ### 1. Clone the repository (or generate a serverless project)
 ```sh
-sls create --name auth-service --template-url https://github.com/Prithwish10/Aucteria/tree/main/auth-service
+sls create --name auth-service --template-url https://github.com/Prithwish10/auth_service
 cd auth-service
 ```
 
