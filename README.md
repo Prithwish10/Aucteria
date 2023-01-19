@@ -65,7 +65,7 @@ It let users watch live sell-offs online and bid on auction markets in real-time
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
-## Built With
+### Built With
 
 * ![HTML5](https://img.shields.io/badge/html5-%23E34F26.svg?style=for-the-badge&logo=html5&logoColor=white)
 * ![CSS3](https://img.shields.io/badge/css3-%231572B6.svg?style=for-the-badge&logo=css3&logoColor=white)
@@ -82,9 +82,33 @@ It let users watch live sell-offs online and bid on auction markets in real-time
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
+<!-- PROJECT WORKING -->
+### How the services work together
+
+The application is based on the **event-driven microservice architecture**, that uses events to trigger and communicate between decoupled microservices.
+It has 3 microservices:
+* **Auth Service**:
+  * This service helps us to handle authentication and authorization using **Auth0**.
+  * It will have an authorizer lambda function which will authorize the users using **Jason Web Token (JWT).
+  * We will also introduce the authorizet in our **API Gateway**, which means every request will be authorised using JWT. This will ensure that our APIs     are protected, and we also get to know the identity of the caller.
+* **Auction Service**: 
+  * It will have 6 lambda functions, out of which 5 of them are used for CRUD operations, i.e., creating an auction, getting a single auction, placing a     bid on an auction, and uploading an auction picture.
+  * For these 5 lambda functions request will come from the **API Gateway**.
+  * When a user creates an auction, we'll process the auction by doing some validations, and we'll write the auction to the **DynamoDB** table.
+  * The 6th lambda function that we have in this service is called the processAuction.
+  * This 6th function will get triggered by the **AWS EventBridge** periodically. And what the function will do is to close an auction after 1 hour being     open. After closing the auction, we need to send email to the highest bidder and seller and the outcome.
+  * This brings us to the Notification Service.
+* **Notification Service**:
+  * It will have an **AWS SQS**.
+  * processAuction lambda function in the Auction Service will send messages/emails to this queue.
+  * The messages will then be picked up by a **sendEmail** lambda function, and an email will be send with the **AWS SES** service.
+  
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
+
 <!-- PROJECT ARCHITECTURE -->
 
-## Project Architecture
+### Project Architecture
 ![Auction_service](https://user-images.githubusercontent.com/59892611/139708274-79a31927-3533-4db4-8d40-ac9232046417.jpg)
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
