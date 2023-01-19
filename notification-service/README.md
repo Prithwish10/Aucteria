@@ -1,4 +1,4 @@
-# Base Serverless Framework Template
+# Notification Service
 
 ## What's included
 * Folder structure used consistently across our projects.
