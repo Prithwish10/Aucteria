@@ -25,7 +25,7 @@
 [![MIT License][license-shield]][license-url]
 [![LinkedIn][linkedin-shield]][linkedin-url] -->
 
-# Aucteria
+# <h1 align="center">Aucteria</h1>
 
 <!-- TABLE OF CONTENTS -->
 <details>
