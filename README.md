@@ -35,6 +35,7 @@
       <a href="#about-the-project">About The Project</a>
       <ul>
         <li><a href="#built-with">Built With</a></li>
+        <li><a href="#how-the-services-work-together">How the services work together</a></li>
         <li><a href="#project-architecture">Project Architecture</a></li>
       </ul>
     </li>
