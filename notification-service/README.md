@@ -1,6 +1,4 @@
-# Codingly.io: Base Serverless Framework Template
-
-https://codingly.io
+# Base Serverless Framework Template
 
 ## What's included
 * Folder structure used consistently across our projects.
@@ -9,7 +7,7 @@ https://codingly.io
 
 ## Getting started
 ```
-sls create --name YOUR_PROJECT_NAME --template-url https://github.com/codingly-io/sls-base
+sls create --name YOUR_PROJECT_NAME --template-url https://github.com/Prithwish10/sls-base-template
 cd YOUR_PROJECT_NAME
 npm install
 ```
