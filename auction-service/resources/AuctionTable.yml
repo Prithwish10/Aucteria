@@ -1,0 +1,26 @@
+AuctionTable: # This is called a logical ID for a resource
+  Type: AWS::DynamoDB::Table
+  Properties:
+    TableName: AuctionTable-${self:provider.stage}
+    BillingMode: PAY_PER_REQUEST
+    AttributeDefinitions:  #This is an array of Objects representing the attributes that must be in each item of our table
+      - AttributeName: id    # 1st Property (Each auction must have an ID)
+        AttributeType: S     # 2nd Property
+      - AttributeName: status
+        AttributeType: S
+      - AttributeName: endingAt
+        AttributeType: S 
+    KeySchema:
+      - AttributeName: id
+        KeyType: HASH
+    GlobalSecondaryIndexes:
+      - IndexName: statusAndEndDate
+        KeySchema:
+          - AttributeName: status
+            KeyType: HASH
+          - AttributeName: endingAt
+            KeyType: RANGE  # This will allow us to sort and filter
+
+        # When we define the GlobalSecondaryIndexes, then a copy of the original table is created, and if we want to search or filter by any of status or endingAt, we can mention whether the result that we'll get will contain all the attributes or not. If we want all the attributes, we need to mention 'ALL'
+        Projection:
+          ProjectionType: ALL

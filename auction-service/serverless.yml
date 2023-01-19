@@ -1,0 +1,107 @@
+service:
+  name: auction-service
+
+plugins:
+  - serverless-bundle
+  - serverless-pseudo-parameters
+
+provider:
+  name: aws
+  runtime: nodejs12.x
+  memorySize: 256
+  stage: ${opt:stage, 'dev'}
+  region: eu-west-1
+  environment:
+    AUCTION_TABLE_NAME: ${self:custom.AuctionTable.name}
+    MAIL_QUEUE_URL: ${self:custom.MailQueue.url}
+    AUCTION_BUCKET_NAME: ${self:custom.AuctionBucket.name}
+  iamRoleStatements:
+    - ${file(iam/AuctionTableIAM.yml):AuctionTableIAM}
+    - ${file(iam/MailQueueIAM.yml):MailQueueIAM}
+    - ${file(iam/AuctionsBucketIAM.yml):AuctionsBucketIAM}
+
+
+  # Serverless.yml file allows us to define all the resources that our application needs, in the resources object
+resources:
+  # Since our cloud provider is AWS so we'll use cloudFormation syntax. This syntax is use to define resources
+  Resources:
+    AuctionTable: ${file(resources/AuctionTable.yml):AuctionTable} # AuctionTable is called a logical ID for a resource
+    AuctionsBucket: ${file(resources/AuctionsBucket.yml):AuctionsBucket}
+    AuctionsBucketPolicy: ${file(resources/AuctionsBucket.yml):AuctionsBucketPolicy}
+    #Cors: ${file(resources/Cors.yml):Cors}
+      
+functions:
+  createAuction:
+    handler: src/handlers/createAuction.handler
+    events:
+      - http:
+          method: POST
+          path: /auction
+          cors: true
+          authorizer: ${self:custom.authorizer} #arn:aws:lambda:eu-west-1:612082999652:function:auth-service-dev-auth
+
+  getAuctions:
+    handler: src/handlers/getAuction.handler
+    events:
+      - http:
+          method: GET
+          path: /auctions
+          cors: true
+          # cors:
+          #   origin: '*'
+          #   headers: 
+          #     - Content-Type
+          #     - X-Amz-Date
+          #     - Authorization
+          #     - X-Api-Key
+          #     - X-Amz-Security-Token
+          #     - X-Amz-User-Agent
+          #   allowCredentials: false
+          authorizer: ${self:custom.authorizer}
+
+  getAuctionById:
+    handler: src/handlers/getAuctionById.handler
+    events:
+      - http:
+          method: GET
+          path: /auction/{id}
+          cors: true
+          authorizer: ${self:custom.authorizer}
+  placeBid:
+    handler: src/handlers/placeBid.handler
+    events:
+      - http:
+          method: PATCH
+          path: /auction/{id}/bid
+          cors: true
+          authorizer: ${self:custom.authorizer}
+
+  uploadAuctionPicture:
+    handler:  src/handlers/uploadAuctionPicture.handler
+    events:
+      - http:
+          method: PATCH
+          path: /auction/{id}/picture
+          cors: true
+          authorizer: ${self:custom.authorizer}
+
+  # This lambda function is responsible for closing and processing the auction
+  # We will schedule our auction 
+  # Schedule will use the service, aws event bridge, that will help us to schedule events
+  processAuction:
+    handler: src/handlers/processAuction.handler
+    #event:
+    #  - schedule: rate(1 minute) # This will make the lambda function run every minute
+
+custom:
+  authorizer: arn:aws:lambda:#{AWS::Region}:#{AWS::AccountId}:function:auth-service-${self:provider.stage}-auth
+  AuctionTable:
+    name: !Ref AuctionTable
+    arn: !GetAtt AuctionTable.Arn
+  MailQueue:
+    arn: ${cf:notification-service-${self:provider.stage}.MailQueueArn}
+    url: ${cf:notification-service-${self:provider.stage}.MailQueueUrl}
+  AuctionBucket:
+    name: auction-service-asd10w9-${self:provider.stage}
+  bundle:
+    linting: false 

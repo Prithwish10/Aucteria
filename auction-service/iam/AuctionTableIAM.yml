@@ -1,0 +1,17 @@
+AuctionTableIAM:
+  Effect: Allow
+  Action:
+    - dynamodb:PutItem
+    - dynamodb:Scan
+    - dynamodb:GetItem
+    - dynamodb:UpdateItem
+    - dynamodb:Query
+  Resource:
+    - ${self:custom.AuctionTable.arn}
+    # - arn:aws:dynamodb:eu-west-1:612082999652:table/AuctionTable #arn:aws:dynamodb:#{AWS::Region}:#{AWS::AccountId}:table/AuctionTable 
+          # arn:aws:dynamodb:eu-west-1:612082999652:table/AuctionTable
+
+    # Since DynamoDB secondary Indexes are sort of a virtual Table, so this table has its own resource arn
+    # The arn looks like this :
+    # arnLaws:dynamodb:eu-west-1:013183387992:table/AuctionsTable-dev/index/statusEndDate
+    - !Join ['/', [ '${self:custom.AuctionTable.arn}', 'index', 'statusAndEndDate' ]]
