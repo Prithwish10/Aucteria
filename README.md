@@ -156,7 +156,7 @@ I'm working on Ubuntu 20.04
       Default region name [us-east-1]: <REGION>
       Default output format [yaml]: <FORMAT OF YOUR serverless.yml file. Give yaml>
       ```
-    * Now log out from your AWS developer console and sing-in with the new username and password that you just created
+    * Now log out from your AWS developer console and sign-in with the new username and password that you just created
     
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
