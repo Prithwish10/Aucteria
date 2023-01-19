@@ -106,11 +106,8 @@ It has 3 microservices:
   * It will have 6 lambda functions, out of which 5 of them are used for CRUD operations, i.e., creating an auction, getting a single auction, placing a bid on an auction, and uploading an auction picture.
   * For these 5 lambda functions request will come from the **API Gateway**.
   * When a user creates an auction, we'll process the auction by doing some validations, and we'll write the auction to the **DynamoDB** table.
-  * The 6th lambda function that we have in this service is called the processAuction.
-  * For these 5 lambda functions request will come from the **API Gateway**.
-  * When a user creates an auction, we'll process the auction by doing some validations, and we'll write the auction to the **DynamoDB** table.
-  * he 6th lambda function that we have in this service is called the processAuction.
-  * This 6th function will get triggered by the **AWS EventBridge** periodically. And what the function will do is to close an auction after 1 hour being     open. After closing the auction, we need to send email to the highest bidder and seller and the outcome.
+  * The 6th lambda function that we have in this service is named as **processAuction**.
+  * This 6th lambda function will get triggered by the **AWS EventBridge** periodically. And what the function will do is to close an auction after 1 hour being open. After closing the auction, we need to send email to the highest bidder and seller and the outcome.
   * This brings us to the Notification Service.
 
 * **Notification Service**:
