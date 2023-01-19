@@ -27,6 +27,14 @@
 
 # <h1 align="center">Aucteria</h1>
 
+<!-- PROJECT LOGO -->
+<br />
+<div align="center">
+  <a href="https://github.com/Prithwish10/Aucteria">
+    <img src="images/Auction_logo.png" alt="Logo" width="100" height="100">
+  </a>
+</div>
+
 <!-- TABLE OF CONTENTS -->
 <details>
   <summary>Table of Contents</summary>
@@ -88,21 +96,27 @@ It let users watch live sell-offs online and bid on auction markets in real-time
 
 The application is based on the **event-driven microservice architecture**, that uses events to trigger and communicate between decoupled microservices.
 It has 3 microservices:
-* **Auth Service**:
-  * This service helps us to handle authentication and authorization using **Auth0**.
-  * It will have an authorizer lambda function which will authorize the users using **Jason Web Token (JWT).
-  * We will also introduce the authorizet in our **API Gateway**, which means every request will be authorised using JWT. This will ensure that our APIs     are protected, and we also get to know the identity of the caller.
-* **Auction Service**: 
-  * It will have 6 lambda functions, out of which 5 of them are used for CRUD operations, i.e., creating an auction, getting a single auction, placing a     bid on an auction, and uploading an auction picture.
-  * For these 5 lambda functions request will come from the **API Gateway**.
-  * When a user creates an auction, we'll process the auction by doing some validations, and we'll write the auction to the **DynamoDB** table.
-  * The 6th lambda function that we have in this service is called the processAuction.
-  * This 6th function will get triggered by the **AWS EventBridge** periodically. And what the function will do is to close an auction after 1 hour being     open. After closing the auction, we need to send email to the highest bidder and seller and the outcome.
-  * This brings us to the Notification Service.
+* **Auth Service**
+
+  * This service helps us to handle authentication and authorization using **Auth0**.
+  * It will have an authorizer lambda function which will authorize the users using **Jason Web Token (JWT)**.
+  * We will also introduce the authorizet in our **API Gateway**, which means every request will be authorised using JWT. This will ensure that our APIs are protected, and we also get to know the identity of the caller.
+
+* **Auction Service**:
+  * It will have 6 lambda functions, out of which 5 of them are used for CRUD operations, i.e., creating an auction, getting a single auction, placing a bid on an auction, and uploading an auction picture.
+  * For these 5 lambda functions request will come from the **API Gateway**.
+  * When a user creates an auction, we'll process the auction by doing some validations, and we'll write the auction to the **DynamoDB** table.
+  * The 6th lambda function that we have in this service is called the processAuction.
+  * For these 5 lambda functions request will come from the **API Gateway**.
+  * When a user creates an auction, we'll process the auction by doing some validations, and we'll write the auction to the **DynamoDB** table.
+  * he 6th lambda function that we have in this service is called the processAuction.
+  * This 6th function will get triggered by the **AWS EventBridge** periodically. And what the function will do is to close an auction after 1 hour being     open. After closing the auction, we need to send email to the highest bidder and seller and the outcome.
+  * This brings us to the Notification Service.
+
 * **Notification Service**:
-  * It will have an **AWS SQS**.
-  * processAuction lambda function in the Auction Service will send messages/emails to this queue.
-  * The messages will then be picked up by a **sendEmail** lambda function, and an email will be send with the **AWS SES** service.
+  * It will have an **AWS SQS**.
+  * processAuction lambda function in the Auction Service will send messages/emails to this queue.
+  * The messages will then be picked up by a **sendEmail** lambda function, and an email will be send using **AWS SES**.
   
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
