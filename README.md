@@ -81,6 +81,7 @@ It let users watch live sell-offs online and bid on auction markets in real-time
 * ![JavaScript](https://img.shields.io/badge/javascript-%23323330.svg?style=for-the-badge&logo=javascript&logoColor=%23F7DF1E)
 * ![React](https://img.shields.io/badge/react-%2320232a.svg?style=for-the-badge&logo=react&logoColor=%2361DAFB)
 * ![NodeJS](https://img.shields.io/badge/node.js-6DA55F?style=for-the-badge&logo=node.js&logoColor=white)
+* ![Express.js](https://img.shields.io/badge/express.js-%23404d59.svg?style=for-the-badge&logo=express&logoColor=%2361DAFB)
 * **Serverless**
 * **Auth0**
 * ![AWS](https://img.shields.io/badge/AWS-%23FF9900.svg?style=for-the-badge&logo=amazon-aws&logoColor=white)
@@ -98,12 +99,12 @@ The application is based on the **event-driven microservice architecture**, that
 It has 3 microservices:
 * **Auth Service**
 
-  * This service helps us to handle authentication and authorization using **Auth0**.
+  * This service handles authentication and authorization using **Auth0**.
   * It will have an authorizer lambda function which will authorize the users using **Jason Web Token (JWT)**.
-  * We will also introduce the authorizet in our **API Gateway**, which means every request will be authorised using JWT. This will ensure that our APIs are protected, and we also get to know the identity of the caller.
+  * We will also introduce the authorizer in our **API Gateway**, which means every request will be authorised using JWT. This will ensure that our APIs are protected, and we also get to know the identity of the caller.
 
 * **Auction Service**:
-  * It will have 6 lambda functions, out of which 5 of them are used for CRUD operations, i.e., creating an auction, getting a single auction, placing a bid on an auction, and uploading an auction picture.
+  * It contains 6 lambda functions, out of which 5 of them are used for CRUD operations, i.e., creating an auction, getting a single auction, placing a bid on an auction, and uploading an auction picture.
   * For these 5 lambda functions request will come from the **API Gateway**.
   * When a user creates an auction, we'll process the auction by doing some validations, and we'll write the auction to the **DynamoDB** table.
   * The 6th lambda function that we have in this service is named as **processAuction**.
