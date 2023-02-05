@@ -43,7 +43,7 @@
       <a href="#about-the-project">About The Project</a>
       <ul>
         <li><a href="#built-with">Built With</a></li>
-        <li><a href="#how-the-services-work-together">How the services work together</a></li>
+        <!-- <li><a href="#how-the-services-work-together">How the services work together</a></li> -->
         <li><a href="#project-architecture">Project Architecture</a></li>
       </ul>
     </li>
@@ -93,7 +93,7 @@ It let users watch live sell-offs online and bid on auction markets in real-time
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 <!-- PROJECT WORKING -->
-### How the services work together
+<!-- ### How the services work together
 
 The application is based on the **event-driven microservice architecture**, that uses events to trigger and communicate between decoupled microservices.
 It has 3 microservices:
@@ -116,7 +116,7 @@ It has 3 microservices:
   * processAuction lambda function in the Auction Service will send messages/emails to this queue.
   * The messages will then be picked up by a **sendEmail** lambda function, and an email will be send using **AWS SES**.
   
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
+<p align="right">(<a href="#readme-top">back to top</a>)</p> -->
 
 
 <!-- PROJECT ARCHITECTURE -->
