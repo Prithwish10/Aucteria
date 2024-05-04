@@ -149,7 +149,7 @@ I'm working on Ubuntu 20.04
   ```
 * **npm**
   
-  If the package in the repositories suits your needs, this is all you need to do to get set up with Node.js. In most cases, you’ll also want to also install npm, the   Node.js package manager. You can do this by installing the npm package with apt:
+  If the package in the repositories suits your needs, this is all you need to do to get set up with Node.js. In most cases, you’ll also want to install npm, the Node.js package manager. You can do this by installing the npm package with apt:
    ```sh
   sudo apt install npm
   ```
